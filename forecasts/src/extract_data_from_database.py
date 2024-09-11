@@ -1,9 +1,19 @@
-import sqlite3
 import pandas as pd
+import psycopg2
+
+# Параметры подключения к PostgreSQL
+postgres_db_config = {
+        'dbname': 'weather',
+        'user': 'postgres',
+        'password': 'postgres',
+        'host': 'localhost',
+        'port': '5432'
+    }
 
 
-def generating_stations(link):
-    conn = sqlite3.connect(link)
+def generating_stations():
+    # Подключение к PostgreSQL
+    conn = psycopg2.connect(**postgres_db_config)
 
     # Запрос для извлечения данных из таблицы stations
     query = "SELECT id, latitude, longitude FROM stations WHERE id IN (SELECT DISTINCT station FROM data)"
@@ -17,14 +27,15 @@ def generating_stations(link):
     return df
 
 
-def get_weather_data(db_path: str, date: str, hour: str):
-    conn = sqlite3.connect(db_path)
+def get_weather_data(date: str, hour: str):
+    # Подключение к PostgreSQL
+    conn = psycopg2.connect(**postgres_db_config)
     cursor = conn.cursor()
 
     query = f"""
-    SELECT station, temp, dwpt, rhum, pres
+    SELECT station, temp, dwpt, rhum, wdir, wspd, pres
     FROM data
-    WHERE date LIKE '{date}%' AND hour = '{hour}'
+    WHERE date::text LIKE '{date}%' AND hour = '{hour}'
     """
     cursor.execute(query)
 

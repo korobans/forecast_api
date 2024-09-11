@@ -1,4 +1,4 @@
-def separator(lat1, lon1, lat2, lon2, n_width, n_height):
+def separator_for_tiff(lat1, lon1, lat2, lon2, n_width, n_height):
     width_deg = abs(lon2 - lon1)
     height_deg = abs(lat2 - lat1)
 
@@ -33,4 +33,32 @@ def separator(lat1, lon1, lat2, lon2, n_width, n_height):
             centers.append(center)
 
     return [corners, centers]
+
+
+def separator_for_json(lat1, lon1, lat2, lon2, n_width, n_height):
+    width_deg = abs(lon2 - lon1)
+    height_deg = abs(lat2 - lat1)
+
+    coef = ((width_deg + height_deg) / 2) * 0.2
+
+    width_deg += coef
+    height_deg += coef
+
+    center_lat = (lat1 + lat2) / 2
+    center_lon = (lon1 + lon2) / 2
+    lat1 = center_lat - height_deg / 2
+    lon1 = center_lon - width_deg / 2
+
+    part_width = width_deg / n_width
+    part_height = height_deg / n_height
+
+    centers = []
+
+    for i in range(n_height):
+        for j in range(n_width):
+            center = [lat1 + (i + 0.5) * part_height, lon1 + (j + 0.5) * part_width]
+
+            centers.append(center)
+
+    return centers
 

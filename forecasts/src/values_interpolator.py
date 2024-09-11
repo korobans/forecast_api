@@ -9,7 +9,7 @@ def interpolate_weather(stations, weather_dict):
     distances = np.array([dist for _, dist in valid_stations])
     inverse_distances = 1 / distances
     weights = inverse_distances / np.sum(inverse_distances)
-    parameters = ['temp', 'dwpt', 'rhum', 'pres']
+    parameters = ['temp', 'dwpt', 'rhum', 'wdir', 'wspd', 'pres']
 
     weighted_values = {}
     for parameter in parameters:
