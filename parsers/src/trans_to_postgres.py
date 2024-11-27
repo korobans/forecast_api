@@ -7,10 +7,10 @@ def trans(link):
     sqlite_db_path = link
     postgres_db_config = {
         'dbname': 'weather',
-        'user': 'Ваше имя пользователя',
-        'password': 'Ваш пароль',
-        'host': 'Ваш хост',
-        'port': 'Ваш порт'
+        'user': 'postgres',
+        'password': 'taro123123',
+        'host': 'localhost',
+        'port': '5432'
     }
 
     # Подключение к SQLite и получение данных

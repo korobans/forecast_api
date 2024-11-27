@@ -5,7 +5,7 @@ import psycopg2
 postgres_db_config = {
         'dbname': 'weather',
         'user': 'postgres',
-        'password': 'postgres',
+        'password': 'taro123123',
         'host': 'localhost',
         'port': '5432'
     }

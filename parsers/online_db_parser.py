@@ -11,19 +11,19 @@ from parsers.src.trans_to_postgres import trans
 
 if __name__ == "__main__":
     link = '../forecasts.db'
-    try:
-        shutil.rmtree('archives')
-        shutil.rmtree('extracted')
-        os.remove(link)
-    except Exception: pass
-    os.mkdir('archives')
-    os.mkdir('extracted')
-    download_stations(False)
-    extract_stations(link)
-    unarchive()
-    set_headers()
-    add_tables(link, False)
-    correct_table_creator(link)
+    # try:
+    #     shutil.rmtree('archives')
+    #     shutil.rmtree('extracted')
+    #     os.remove(link)
+    # except Exception: pass
+    # os.mkdir('archives')
+    # os.mkdir('extracted')
+    # download_stations(False)
+    # extract_stations(link)
+    # unarchive()
+    # set_headers()
+    # add_tables(link, False)
+    # correct_table_creator(link)
     trans(link)
     try:
         shutil.rmtree('archives')

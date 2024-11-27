@@ -89,7 +89,7 @@ async def get_geojson(lat1: float, lon1: float, lat2: float, lon2: float, n_widt
 
         # Преобразуем указанные даты и часы в объекты datetime
         end_datetime = datetime.strptime(f"{date} {hour}", "%Y-%m-%d %H")
-        start_datetime = datetime.strptime(f"{date} {int(hour) - 4}", "%Y-%m-%d %H")  # Текущая дата и время
+        start_datetime = datetime.now()
 
         # Генерируем список дат и часов от start_datetime до end_datetime
         datetime_list = []
@@ -101,6 +101,7 @@ async def get_geojson(lat1: float, lon1: float, lat2: float, lon2: float, n_widt
             current_datetime += timedelta(hours=1)
 
         for dt in datetime_list:
+            print(dt)
             date_str = dt.strftime("%Y-%m-%d")
             hour_str = dt.strftime("%H")
             stations_data = get_weather_data(date_str, hour_str)
